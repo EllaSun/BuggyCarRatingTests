@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using TechTalk.SpecFlow;
+using System.Threading;
 
 namespace BuggyCarRating.tests
 {
@@ -20,15 +21,18 @@ namespace BuggyCarRating.tests
         public IWebElement vote => helper.GetElement(LocatorTypes.CSS, ModelPageLocators.Vote);
 
 
-        public void InputComment(string text)
+        public ModelPage InputComment(string text)
         {
             comment.Clear();
             comment.SendKeys(text);
+            return this;
         }
 
-        public void ClickVote()
+        public ModelPage ClickVote()
         {
+            Thread.Sleep(2000);
             vote.Click();
+            return this;
         }
 
         public static class ModelPageLocators

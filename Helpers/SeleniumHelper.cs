@@ -1,5 +1,5 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
+using System.Threading;
 using System;
 using System.Collections.Generic;
 using TechTalk.SpecFlow;
@@ -24,7 +24,11 @@ namespace BuggyCarRating.tests
 
         public IWebElement FindElement(By locator)
         {
-            return _driver.FindElement(locator);
+            //Hard code: Wait for a few seconds;
+            //Todo: use wait method
+            Thread.Sleep(2000);
+            var ele = _driver.FindElement(locator);
+            return ele == null ? null : ele;
         }
 
         public IWebElement GetElement(LocatorTypes locatorType, string locator)
@@ -48,7 +52,7 @@ namespace BuggyCarRating.tests
                         break;
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 throw new Exception("Invalid locator type: " + locatorType + "please check the corresponding page object ");
             }

@@ -5,15 +5,16 @@ namespace BuggyCarRating.tests
 {
     public class RegisterPage:HomePage
     {
-        //private HeaderPage headerPage;
+        public HeaderPage headerPage;
         readonly SeleniumHelper helper;
         readonly ScenarioContext _scenarioContext;
+       
 
         public RegisterPage(ScenarioContext scenarioContext):base(scenarioContext) 
         {
             _scenarioContext = scenarioContext;
             helper = new SeleniumHelper(_scenarioContext);
-            //headerPage = new HeaderPage(scenarioContext);
+            headerPage = new HeaderPage(scenarioContext);
         }
 
         public IWebElement Login => helper.GetElement(LocatorTypes.XPATH, RegisterPageLocators.Login);
@@ -24,48 +25,56 @@ namespace BuggyCarRating.tests
         public IWebElement Register => helper.GetElement(LocatorTypes.XPATH, RegisterPageLocators.Register);
         public IWebElement Cancel => helper.GetElement(LocatorTypes.XPATH, RegisterPageLocators.Cancel);
 
-        public void GoToUrl()
+        public RegisterPage GoToUrl()
         {
-            helper.NavigateToUrl(ScenarioContext.Current["BaseUrl"].ToString() + "/register");
+            helper.NavigateToUrl(_scenarioContext.Get<string>("BaseUrl").ToString() + "/register");
+            return this;
         }
-        public void InputLogin(string value)
+        public RegisterPage InputLogin(string value)
         {
             Login.Clear();
             Login.SendKeys(value);
+            return this;
         }
 
-        public void InputFirstName(string value)
+        public RegisterPage InputFirstName(string value)
         {
             FirstName.Clear();
             FirstName.SendKeys(value);
+            return this;
         }
 
-        public void InputLastName(string value)
+        public RegisterPage InputLastName(string value)
         {
             LastName.Clear();
             LastName.SendKeys(value);
+            return this;
         }
 
-        public void InputPassword(string value)
+        public RegisterPage InputPassword(string value)
         {
             Password.Clear();
             Password.SendKeys(value);
+            return this;
         }
 
-        public void InputConfirmPassword(string value)
+        public RegisterPage InputConfirmPassword(string value)
         {
             ConfirmPassword.Clear();
             ConfirmPassword.SendKeys(value);
+            return this;
         }
 
-        public void ClickRegister()
+        public RegisterPage ClickRegister()
         {
             Register.Click();
+            return this;
         }
 
-        public void ClickCancel()
+        public RegisterPage ClickCancel()
         {
             Cancel.Click();
+            return this;
         }
 
         public static class RegisterPageLocators

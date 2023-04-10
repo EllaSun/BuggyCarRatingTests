@@ -12,7 +12,8 @@ namespace BuggyCarRating.tests
             _scenarioContext = scenarioContext;
            
             BaseUrl = ConfigHelper.GetAppSetting("BaseUrl");
-            ScenarioContext.Current["BaseUrl"] = BaseUrl;
+            if(!(_scenarioContext.ContainsKey("BaseUrl")))
+                _scenarioContext.Add("BaseUrl", BaseUrl);
            
         }
 
